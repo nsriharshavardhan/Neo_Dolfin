@@ -279,7 +279,7 @@ print(f"Validation Loss: {val_loss:.4f}, Validation Accuracy: {val_accuracy:.4f}
 
 - **Model Evaluation**: After training, the models are evaluated on the validation set, and the best model is identified based on accuracy. The best model is then saved, and its performance is tested on the test set.
 
-- **BERT Integration**: The notebook also includes code for initializing a BERT tokenizer and loading a pre-trained BERT model for sequence classification, although this part seems to be incomplete as there's no further code to train or evaluate the BERT model.
+- **BERT Integration**: The notebook also includes code for initializing a BERT tokenizer and loading a pre-trained BERT model for sequence classification.
 
 **Interpreting the Results**
 
