@@ -44,6 +44,18 @@ model.fit(X_train, y_train)
 # Save the model to a file
 joblib.dump(model, 'random_forest_model.joblib')
 
+y_pred = model.predict(X_test)
+
+# Plotting the actual vs predicted values
+plt.figure(figsize=(10, 5))
+plt.plot(y_test.index, y_test, label='Actual')
+plt.plot(y_test.index, y_pred, label='Predicted', linestyle='--')
+plt.title('Test Data vs Predicted Data')
+plt.xlabel('Date')
+plt.ylabel('Total Balance')
+plt.legend()
+plt.show()
+
 # Plotting function with the new color scheme
 def plot_feature_importances(model, features):
     importances = model.feature_importances_
