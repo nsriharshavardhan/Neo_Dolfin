@@ -776,6 +776,43 @@ def feedback():
 
         print("Feedback Data Logged to CSV")
 
+        # # Connect to the SQLite database (create it if it doesn't exist)
+        # db_filename = 'db/dolfin_db.db'
+        # conn = sqlite3.connect(db_filename)
+        #
+        # # Create a cursor to execute SQL commands
+        # cursor = conn.cursor()
+        #
+        # # Create a table if it doesn't exist
+        # cursor.execute('''
+        #     CREATE TABLE IF NOT EXISTS feedback (
+        #         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        #         features_rating INTEGER,
+        #         security_rating INTEGER,
+        #         recommend_rating INTEGER,
+        #         features_valuable VARCHAR(50),
+        #         competitors_do_well TEXT,
+        #         similarities TEXT
+        #     )
+        # ''')
+        #
+        # # Insert the feedback data into the table
+        # cursor.execute('''
+        #     INSERT INTO feedback (
+        #         features_rating, security_rating, recommend_rating,
+        #         features_valuable, competitors_do_well, similarities
+        #     ) VALUES (?, ?, ?, ?, ?, ?)
+        # ''', (
+        #     features_rating, security_rating, recommend_rating,
+        #     features_valuable, competitors_do_well, similarities
+        # ))
+        #
+        # # Commit the changes and close the connection
+        # conn.commit()
+        # conn.close()
+        #
+        # print("Feedback Data Logged to SQLite database (feedback.db)")
+
         return render_template('feedback_thank_you.html')
 
     # Render the feedback form if the request is not POST
@@ -819,6 +856,53 @@ def profile():
         defacc = 'ALL'
         
         return render_template("profile.html", jsd8=jfx8, email=email, jsd6=curr_bal, jsxx=jfxx, jsd3=jfx3, user_id=user_id, defacc=defacc)
+
+def generate_sankey(data, custom_labels=None):
+
+    # Create a list of all unique nodes
+    nodes = pd.concat([data['features_valuable'], data['sentiment']]).unique()
+
+    # Create a mapping of node names to integers
+    node_map = {node: i for i, node in enumerate(nodes)}
+
+    # Map the source nodes to their respective indices
+    source_indices = data['features_valuable'].map(node_map)
+
+    # Map the target nodes to their respective indices
+    target_indices = data['sentiment'].map(node_map)
+
+    # Create a Sankey diagram
+    fig = go.Figure(data=[go.Sankey(
+        node=dict(
+            pad=15,
+            thickness=20,
+            line=dict(color="#fafafe", width=0.5),
+            label=nodes.tolist(),
+            color="#343a40"
+        ),
+        link=dict(
+            source=source_indices,
+            target=target_indices,
+            value=[1] * len(data),  # each row represents a single unit
+            color='#0077bb'
+        )
+    )])
+
+    fig.update_layout(title_text="Sankey Diagram", font_size=10)
+
+    image_base64 = fig.to_image(format='png', engine='kaleido')
+
+    # # Save the chart to a BytesIO object
+    # image_stream = io.BytesIO()
+    # fig.write_image(image_stream, format='png')
+    # image_stream.seek(0)
+    #
+    # # Encode the image to base64
+    # image_base64 = base64.b64encode(image_stream.read()).decode('utf-8')
+
+    # Return the encoded image
+    return image_base64
+    
 def generate_pie_chart(data, category, custom_labels=None):
     # Count the occurrences of each value in the given category
     value_counts = data[category].value_counts()
@@ -829,7 +913,7 @@ def generate_pie_chart(data, category, custom_labels=None):
     
     # Check if custom labels are provided
     labels = custom_labels if custom_labels else value_counts.index
-    plt.pie(value_counts, labels=labels, autopct='%1.1f%%', startangle=90, colors=['red', 'orange', 'yellow', 'green', 'blue'])
+    plt.pie(value_counts, labels=labels, autopct='%1.1f%%', startangle=90, colors=['#343a40', '#0077bb', '#d9d9d9', '#fafafe', '#abb5be'])
     plt.title(f'{category} Distribution')
 
     # Add a legend
@@ -846,28 +930,30 @@ def generate_pie_chart(data, category, custom_labels=None):
     # Return the encoded image
     return image_base64
 
-@app.route('/visualizations', methods=['GET'])
+@app.route('/feedback_visualizations', methods=['GET'])
 def visualizations():
-    # Assuming 'feedback_data.csv' is your CSV file inside the 'data' folder
-    csv_filename = 'data/feedback_data.csv'
+    
+    csv_filename = 'ai/generated_data/feedback_data.csv'
 
     # Read the CSV file into a Pandas DataFrame
     data = pd.read_csv(csv_filename)
 
-    # Get unique categories from the DataFrame columns (excluding non-numeric ones)
-    categories = [col for col in data.columns if data[col].dtype == 'int64']
+    # Get unique categories from the DataFrame columns
+    categories = [col for col in data.columns if data[col].dtype == 'int64' or col == "features_valuable" or col == "sentiment"]
 
     # Generate the chart data for each category
     chart_data = {}
     for category in categories:
         chart_data[category] = generate_pie_chart(data, category)
 
+    # chart_data["features_sentiment_relationship"] = generate_sankey(data)
+
     return render_template('visualizations.html', chart_data=chart_data)
 
 @app.route('/visualizations/<category>', methods=['GET'])
 def visualize_category(category):
     # Assuming 'feedback_data.csv' is your CSV file
-    csv_filename = 'data/feedback_data.csv'
+    csv_filename = 'ai/generated_data/feedback_data.csv'
 
     # Read the CSV file into a Pandas DataFrame
     data = pd.read_csv(csv_filename)
