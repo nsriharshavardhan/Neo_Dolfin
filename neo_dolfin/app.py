@@ -759,7 +759,7 @@ def feedback():
         print("Received Feedback Data:", feedback_data)
 
         # Log the data to a CSV file
-        data_folder = 'data'
+        data_folder = 'ai/generated_data'
         os.makedirs(data_folder, exist_ok=True)
 
         # Log the data to a CSV file inside the 'data' folder
