@@ -8,6 +8,7 @@ Original file is located at
 """
 
 import torch
+import numpy as np
 from transformers import BertTokenizerFast, BertForSequenceClassification
 from sklearn.model_selection import train_test_split
 from torch.utils.data import Dataset, DataLoader
@@ -68,7 +69,7 @@ for epoch in range(3):
         attention_mask = batch['attention_mask'].to(device)
         labels = batch['labels'].to(device)
         outputs = model(input_ids, attention_mask=attention_mask, labels=labels)
-        loss = outputs[0]
+        loss = outputs.loss
         loss.backward()
         optimizer.step()
         total_loss += loss.item()
@@ -85,7 +86,7 @@ for epoch in range(3):
         labels = batch['labels'].to(device)
         with torch.no_grad():
             outputs = model(input_ids, attention_mask=attention_mask)
-        logits = outputs[0]
+        logits = outputs.logits
         predictions = torch.argmax(logits, dim=-1)
         total_predictions.extend(predictions.cpu().numpy())
         total_actual.extend(labels.cpu().numpy())
@@ -115,7 +116,7 @@ plt.tight_layout()
 plt.show()
 
 # Save the model
-torch.save(model.state_dict(), 'best_model_1.pt')
+torch.save(model.state_dict(), 'best_model.pt')
 
 # Calculate sentiment counts in training and testing data
 train_counts = train_labels.value_counts()
