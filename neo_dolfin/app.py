@@ -35,6 +35,10 @@ import matplotlib.pyplot as plt
 import base64
 import matplotlib
 import torch
+import plotly.graph_objects as go
+from wordcloud import WordCloud
+from textblob import TextBlob
+from transformers import BertTokenizerFast, BertForSequenceClassification
 matplotlib.use('Agg')
 
 from ai.cloud import word_cloud, expenditure_cluster_model
@@ -215,6 +219,11 @@ user_ops = API_db_op
 db_op = database_operation
 API_CORE_ops = optimized_API.Core(os.getenv('API_KEY'))
 API_DATA_ops = optimized_API.Data()
+
+# Too big for github around 411MB
+# Load the pre-trained BERT model
+# sentiment_model = BertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels=3)
+# sentiment_model.load_state_dict(torch.load('ai/sentiment_analysis/best_model.pt', map_location=torch.device('cpu')))  # Load your saved model weights
 
 class User(db.Model):
     id =        db.Column(db.Integer, primary_key=True)
@@ -817,14 +826,57 @@ def feedback():
         competitors_do_well = request.form['competitors_do_well']
         similarities = request.form['similarities']
 
+        # Too big for github model around 411MB
+        # #######################################
+        #
+        # #Sentiment analysis using bert model#
+        #
+        # # Load the tokenizer
+        # tokenizer = BertTokenizerFast.from_pretrained('bert-base-uncased')
+        #
+        # # Example input sentence
+        # text = competitors_do_well + similarities
+        #
+        # # Tokenize the input
+        # inputs = tokenizer(text, return_tensors='pt', padding=True, truncation=True)
+        #
+        # # Make predictions
+        # with torch.no_grad():
+        #     model_logits = sentiment_model(**inputs).logits
+        #     probabilities = torch.softmax(model_logits, dim=1)
+        #     predicted_class = torch.argmax(probabilities, dim=1).item()
+        #
+        # # Map predicted class to sentiment label
+        # sentiment_labels = {0: 'negative', 1: 'neutral', 2: 'positive'}
+        # sentiment = sentiment_labels[predicted_class]
+        #
+        # ######################################
+
+        sentence = competitors_do_well + similarities
+
+        # Analyze sentiment
+        analysis = TextBlob(sentence)
+
+        # Get polarity (range: -1 to 1)
+        polarity = analysis.sentiment.polarity
+
+        # Determine sentiment
+        if polarity > 0:
+            sentiment = "positive"
+        elif polarity < 0:
+            sentiment = "negative"
+        else:
+            sentiment = "neutral"
+
         # Create a dictionary with the form data
         feedback_data = {
-            'Features Rating': features_rating,
-            'Security Rating': security_rating,
-            'Recommendation Rating': recommend_rating,
-            'Valuable Features': features_valuable,
-            'Competitors Do Well': competitors_do_well,
-            'Similarities': similarities,
+            'features_rating': features_rating,
+            'security_rating': security_rating,
+            'recommend_rating': recommend_rating,
+            'features_valuable': features_valuable,
+            'competitors_do_well': competitors_do_well,
+            'similarities': similarities,
+            'sentiment': sentiment
         }
 
         print("Received Feedback Data:", feedback_data)
@@ -961,18 +1013,7 @@ def generate_sankey(data, custom_labels=None):
 
     fig.update_layout(title_text="Sankey Diagram", font_size=10)
 
-    image_base64 = fig.to_image(format='png', engine='kaleido')
-
-    # # Save the chart to a BytesIO object
-    # image_stream = io.BytesIO()
-    # fig.write_image(image_stream, format='png')
-    # image_stream.seek(0)
-    #
-    # # Encode the image to base64
-    # image_base64 = base64.b64encode(image_stream.read()).decode('utf-8')
-
-    # Return the encoded image
-    return image_base64
+    fig.write_html("static/html/sankey.html")
     
 def generate_pie_chart(data, category, custom_labels=None):
     # Count the occurrences of each value in the given category
@@ -1017,7 +1058,14 @@ def visualizations():
     for category in categories:
         chart_data[category] = generate_pie_chart(data, category)
 
-    # chart_data["features_sentiment_relationship"] = generate_sankey(data)
+    generate_sankey(data)
+
+    competitor_text = ' '.join(data['competitors_do_well'])
+    similarity_text = ' '.join(data['similarities'])
+    wordcloud = WordCloud().generate(competitor_text)
+    wordcloud_similarity = WordCloud().generate(similarity_text)
+    wordcloud.to_file("static/img/competitor_wordcloud.png")
+    wordcloud_similarity.to_file("static/img/similarities_wordcloud.png")
 
     return render_template('visualizations.html', chart_data=chart_data)
 
