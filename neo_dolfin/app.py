@@ -794,7 +794,12 @@ def open_terms_of_use():
 # APPLICATION TERMS OF USE-AI PAGE 
 @app.route('/terms-of-use-ai/')
 def open_terms_of_use_AI():
-        return render_template("TermsofUse-AI.html") 
+        return render_template("TermsofUse-AI.html")
+
+# APPLICATION ABOUT-US PAGE 
+@app.route('/about-us/')
+def open_about_us():
+        return render_template("aboutus.html") 
     
 # APPLICATION Article Template PAGE 
 @app.route('/articleTemplate/')
