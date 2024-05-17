@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DolFin - Terms of Use</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/main.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/TermsOfUse.css')}}">
+
+
+</head>
+
+<body>
+
+  {% include 'components/navbar.html' %}
+
+
+  <div id="mainBody">
+
+    <div id="headerSection" class="p-5">
+      <h1 id="headerTitle" class="display-1 text-center">About Us</h1>
+    </div>
+
+    <svg id="rectangleDivider" width="100%" height="12" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="12" fill="#343A40" />
+    </svg>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"></script>
+
+  <div class="container-fluid w-75">
+
+    <div class="pt-4 overflow-auto" style="margin: 0 auto;">
+      <div class="card py-5 w-100 h-50 border-0" style="width: 18rem;">
+        <div class="card-header dolfin-dark-bg-color rounded-top-4 ">
+          <h3 class="card-title" style="text-align: left;color: white;">About Us</h3>
+          <h4 class="card-subtitle mb-2 text-light" style="color: white;">Last Updated: 14th May 2024</h4>
+          <hr>
+          <ul class="nav nav-tabs card-header-tabs custom-nav fs-5 justify-content-around">
+            <li class="nav-item px-3 py-1">
+              <a class="nav-link rounded-2 active" data-bs-toggle="tab" href="#terms1">Acknowledgment</a>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body custom tab-content card-body-fixed-height">
+          <div class="tab-pane fade active show" id="terms1">
+
+            <h4 style="margin-left:.25in;text-indent:-.25in"><span style="font:7.0pt Times New Roman">&nbsp;&nbsp;&nbsp;
+              </span>Acknowledgment</h4>
+            <p class="MsoNormal"><b><span style="font-family:Arial,sans-serif">&nbsp;</span></b></p>
+
+            <p class="MsoNormal" style="margin-left:.25in">
+                <b><span style="font-family:Arial,sans-serif">The</span></b><span style="font-family:Arial,sans-serif">
+                  developers at DolFin would like to acknowledge the research undertaken by the Melbourne Institute in collaboration with the Commonwealth Bank of Australia (CBA) into the field of Financial Wellbeing. Their partnership has been pivotal in shaping the financial wellbeing models integrated into this application.
+                </span>
+            </p>
+            
+            <p class="MsoNormal" style="margin-left:.25in">
+                <span style="font-family:Arial,sans-serif">
+                  The reported and observed financial wellbeing scales developed by the Melbourne Institute-CBA partnership serves as a cornerstone for DolFin's mission to empower users with actionable insights into their financial health. By implementing both the reported and observed wellbeing scales developed by this partnership, DolFin ensures that users receive a holistic understanding of their financial position, thus fostering informed decision-making and improved financial outcomes.
+                </span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+
+  {% include 'components/footer.html' %}
+
+
+</body>
+
+</html>
