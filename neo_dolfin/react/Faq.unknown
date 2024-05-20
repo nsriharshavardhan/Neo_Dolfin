@@ -1,0 +1,51 @@
+import React from 'react';
+import Navbar from './components/navbar'; // Assuming Navbar component exists
+import ChatbotWidget from './components/chatbotWidget'; // Assuming ChatbotWidget component exists
+import Footer from './components/footer'; // Assuming Footer component exists
+import './css/main.css'; // Assuming main.css exists
+import './css/faq.css'; // Assuming faq.css exists
+import { Accordion } from 'react-bootstrap'; // Assuming you have installed react-bootstrap
+
+const FAQPage = () => {
+  return (
+    <div>
+      <Navbar />
+      <div id="mainBody">
+        <div id="headerSection" className="py-5 text-center">
+          <div className="row justify-content-between">
+            <div className="col-md-6 d-flex justify-content-start">
+              <img src="/static/img/faq.png" className="img-fluid" alt="FAQ Image 1" />
+            </div>
+            <div className="col-md-6 d-flex justify-content-end">
+              <img src="/static/img/faq.png" className="img-fluid" alt="FAQ Image 2" />
+            </div>
+          </div>
+        </div>
+        <svg id="rectangleDivider" width="100%" height="0" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100%" height="12" fill="#343A40" />
+        </svg>
+        <div id="accordionMain" className="row d-flex justify-content-center">
+          <Accordion id="FlushAccordion" className="accordion accordion-flush d-grid gap-4 w-50">
+            {/* FAQ 1 */}
+            <Accordion.Item eventKey="0">
+              <Accordion.Header>What is DolFin?</Accordion.Header>
+              <Accordion.Body>DolFin is a Fintech solution that aims to address the issue of people struggling to keep track of their finances, the difficulties and costs associated with obtaining financial advice, banks acting monopolistically and traditional banking not serving the people equally.</Accordion.Body>
+            </Accordion.Item>
+            {/* Add more FAQ items similarly */}
+          </Accordion>
+        </div>
+        <div id="newContainer" className="row d-flex justify-content-center my-5">
+          <div className="col text-center">
+            <h2 className="mt-4">Still have questions?</h2>
+            <p className="mt-2">Can't find the answer you're looking for? Chat with our chatbot now.</p>
+          </div>
+        </div>
+      </div>
+      {/* Chatbot widget */}
+      <ChatbotWidget />
+      <Footer />
+    </div>
+  );
+};
+
+export default FAQPage;

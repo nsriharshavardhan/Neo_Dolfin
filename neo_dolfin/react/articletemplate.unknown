@@ -1,0 +1,53 @@
+import React from 'react';
+import Navbar from './components/Navbar'; // Import your Navbar component
+import Footer from './components/Footer'; // Import your Footer component
+
+const ArticlePage = ({ articles }) => {
+    return (
+        <div>
+            <Navbar />
+            {articles.map((article, index) => (
+                <div key={index}>
+                    <div className="container" id="mainTitleArea">
+                        <div className="row">
+                            <div className="col">
+                                <h1 id="articleTitle">{article.title}</h1>
+                            </div>
+                            <div className="col-sm-6 text-sm-start text-md-end">
+                                <h2 id="articleDate">{article.date}</h2>
+                            </div>
+                        </div>
+                        <svg height="12" id="articleBreak" width="100%" xmlns="http://www.w3.org/2000/svg">
+                            <rect fill="#343A40" height="12" width="100%"></rect>
+                        </svg>
+                    </div>
+                    <div className="container" id="firstSection">
+                        <div className="row">
+                            <div className="col">
+                                <p id="p1">{article.content1}</p>
+                            </div>
+                            <div className="col-md-6">
+                                <p id="p2">{article.content2}</p>
+                            </div>
+                        </div>
+                        <div className="container" id="secondSection">
+                            <div className="row">
+                                <div className="col-md-6 text-sm-start" id="quoteBackground">
+                                    <h3 id="quoteText">"{article.quote1},</h3>
+                                    <h3 id="quoteText2">{article.quote2}..."</h3>
+                                </div>
+                                <div className="col">
+                                    <p id="p3">{article.content3}</p>
+                                </div>
+                            </div>
+                            <p id="p4">{article.content4}</p>
+                        </div>
+                    </div>
+                </div>
+            ))}
+            <Footer />
+        </div>
+    );
+};
+
+export default ArticlePage;

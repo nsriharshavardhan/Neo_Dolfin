@@ -1,0 +1,40 @@
+import React from 'react';
+import './chatbot.css'; // Import your CSS file
+import chatbotImage from '../static/img/favicon-32x32.png'; // Import your chatbot image
+
+const Chatbot = () => {
+    return (
+        <div>
+            <div className="container p-4">
+                <h2 className="heading">DolFine chatbot</h2>
+            </div>
+            <div className="chatbox-container" style={{ position: 'fixed', bottom: 0, right: 0 }}>
+                <div className="chatbox">
+                    <div className="chatbox__support">
+                        <div className="chatbox__header">
+                            <div className="chatbox__image--header">
+                                <img src={chatbotImage} alt="image" />
+                            </div>
+                            <div className="chatbox__content--header">
+                                <h4 className="chatbox__heading--header">Chatbot</h4>
+                            </div>
+                        </div>
+                        <div className="chatbox__messages">
+                            <div></div>
+                        </div>
+                        <div className="chatbox__footer">
+                            <input type="text" placeholder="Write a message..." />
+                            <button className="chatbox__send--footer send__button">Send</button>
+                            <button className="chatbox__send--footer voice__button">Voice</button>
+                        </div>
+                    </div>
+                    <div className="chatbox__button">
+                        <button><img src="../static/img/chat_724715.png" alt="chat" /></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Chatbot;

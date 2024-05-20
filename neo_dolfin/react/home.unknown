@@ -1,0 +1,89 @@
+import React, { useEffect } from 'react';
+import Navbar from './components/navbar'; // Import your Navbar component
+import Footer from './components/footer'; // Import your Footer component
+import './home.css'; // Import your CSS files
+
+const Home = () => {
+    useEffect(() => {
+        const smoothScroll = () => {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        };
+        smoothScroll();
+    }, []);
+
+    return (
+        <div>
+            <Navbar />
+            <div id="titleSection">
+                <h2 id="titleSubtitle">Join <span id="titleAlt">DolFin</span> Today and </h2>
+                <h1 id="titleH1">Start Saving</h1>
+            </div>
+
+            <div id="anchorBarList" className="container">
+                <div className="row">
+                    <div className="col-sm">
+                        <a id="anchorItem" className="item_sec_nav" href="#firstSection">Your Finance Future</a>
+                    </div>
+                    <div className="col-sm">
+                        <p id="slashSpace">/</p>
+                    </div>
+                    <div className="col-sm">
+                        <a id="anchorItem" className="item_sec_nav" href="#secondSection">Personalized Dashboard</a>
+                    </div>
+                    <div className="col-sm">
+                        <p id="slashSpace">/</p>
+                    </div>
+                    <div className="col-sm">
+                        <a id="anchorItem" className="item_sec_nav" href="#thirdSection">Why Choose Us</a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="firstSection" className="container">
+                <div className="row">
+                    <div id="firstSectionBG" className="col">
+                        <div className="first-sec-content">
+                            <h2 id="firstSectionHeading">Empowering Your Financial Future</h2>
+                            <p id="firstSectionParagraph">DolFin's cutting-edge algorithms analyze your historical spending patterns to
+                                provide real-time alerts when you
+                                overspend.<br /> Take control of your finances effortlessly.</p>
+                        </div>
+                    </div>
+                    <div id="img-removal" className="col">
+                        <img id="firstSectionImg" src="/static/img/homeBubbles.svg" alt="Decorative bubbles" />
+                    </div>
+                </div>
+            </div>
+
+            <div id="secondSection">
+                <div className="second-section-content">
+                    <h2 id="secondSectionHeading">Personalized<br />Dashboard</h2>
+                    <p id="secondSectionParagraph">Access a tailor-made dashboard that visualizes your income, expenses, and savings,
+                        putting your financial world at your
+                        fingertips.</p>
+                </div>
+            </div>
+
+            <div id="bottomSection">
+                <div id="thirdSection">
+                    <h2 id="thirdSectionHeading">Why Choose Us</h2>
+                    <ul id="thirdSectionParagraph">
+                        <li><strong>Data Security:</strong> Top-notch protection for your financial data.</li>
+                        <li><strong>User-Friendly Interface:</strong> Easy navigation for all users.</li>
+                        <li><strong>Financial Expertise:</strong> Proven track record in finance management</li>
+                    </ul>
+                </div>
+            </div>
+            <Footer />
+        </div>
+    );
+};
+
+export default Home;
