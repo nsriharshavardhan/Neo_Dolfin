@@ -1,0 +1,21 @@
+import React from 'react';
+import './delete_account.css'; // Import your CSS file
+import Navbar from './components/navbar'; // Import your Navbar component
+
+const DeleteAccount = () => {
+    return (
+        <div>
+            <Navbar />
+            <div className="delete-account-container">
+                <h1>Delete My Account</h1>
+                {/* Add your content for the delete account page here */}
+                <p>Are you sure you want to delete your account?</p>
+                <form action="/delete_account" method="POST">
+                    <button type="submit" className="delete-account-btn">Confirm Delete</button>
+                </form>
+            </div>
+        </div>
+    );
+};
+
+export default DeleteAccount;

@@ -1,3 +1,5 @@
+
+
 **DataBytes - Company Structure and Objectives
 for 2024, Trimester 1**
 
@@ -294,8 +296,8 @@ height="4.840277777777778in"}
 |Yi Guan |FE+BE|
 |Zakarya Guerinat |FE|
 
-  
-  ------------------------------------------------------------------------
+
+------------------------------------------------------------------------
 
 **Contribution Updates**
 
@@ -326,6 +328,15 @@ height="4.840277777777778in"}
 6.  **Define data handling policies for a safer data environment**
 
     a.  Data handling policies have been developed
+
+7. **Create Transaction Classification AI model**
+
+    a. Multiple NLP models have been developed to replace the Basiq API for next trimester.
+
+8. **Create a Fraud Detection AI model**
+
+    a. A fraud detection model has been developed to protect DolFin customers.
+
 
 **New:**
 
@@ -397,12 +408,18 @@ height="4.840277777777778in"}
 </details>
 
 <details>
-  
+
 <summary>Sprint 3&4 Contributions</summary>
 
 | Name                  | Contributions|
 |:-------------|:-------------------|
 | Nicholas Lane   | Write contributions here ! <li>I developed a NLP model that uses transfer learning to classify transactions using a BERT transformer.</li><li>I wrote code to clean and preprocess text data, encode class labels, then tokenized transaction descriptions using BERT tokenizer, convert to BERT input format.</<li><li>Created a function to create datasets, create datasets for training, validation, and testing.</li><li>Loaded in the Pre-trained BERT Model: Load pre-trained BERT model for NLP classification, then added an output layer for class prediction.</li><li>Compiled and train the BERT model with training dataset and fine tuned the model and finally evaluated the performance of the model.</li><li>Updated the code to include the DolFin colour code format, and resubmitted the code</li><li>I development of a Deep Neural Network model to identify and classify fraudulent bank transactions.</li><li>I searched for a suitable dataset, that would contain the information that DolFin would be able to access through the Open Banking platform.</li><li>I write code to clean and preprocess the various data types and prepare them for the deep learning model.</li><li>I split the data into training and testing datasets which were then made into TensorFlow datasets, which had been shuffled and prefetched.</li><li>I developed a model and added regulation to improve the model’s generalizability and reduce overfitting to the training data.</li><li>>The model was compiled and then evaluated, I also updated the colours to the Dolfin colour format and then submitted the code as a .py file.</li><liAttended product owner meetings and team meetings</li><li>Assist with handover documentation and presentation slides.</li>|
-| Full name   | Write contributions here ! <li>ITEM 1</li><li>ITEM 2</li><li>ITEM 3</li><li>ITEM 4</li><li>ITEM 5</li><li>ITEM 6</li>|
-  
+| Junkai Jiang | Write notes about how to set up Dolfin_new<br/>Set up Dolfin_new GitHub repository<br/>Develop JWT service for user authentication(Dolfin_new)<br/>Develop Basiq API service(Dolfin_new)<br/>Develop database service(Dolfin_new)<br/>Review the pull request by Deepak: Optimization of the clear transaction function.<br/>Review the pull request by Sagar: Email verification function.<br/>Review the pull request for rebuilding the login route and update the login page<br/>Review the pull request for rebuilding the dashboard<br/>Set up Dolfin_new Trello backlog<br/>Redesigned and developed the dashboard web interface of the new project<br/>Discussions with Junior Developer<br/>Discuss with Junior about setting up a Dolfin account<br/>Discuss with Junior about the transition of the project (React part)<br/>Discuss with Junior about the account delete functionality<br/>Discuss with Juniors about the handover document<br/>Connect the reported financial well-being feature to the database and backend(Dolfin_new)<br/>Connect income and expenditure overview to the backend(Dolfin_new)<br/>Connect D-cloud to the backend(Dolfin_new)<br/>Add linking to the bank account feature(Dolfin_new)<br/>Fix the backend Docker file<br/>Complete the showcase video (Dolfin_new part) |
+| Ata Colak |<li>Develop chatbot which uses Groq API as inference engine and LLAMA3-70b as large language model</li><li>Experiment running LLMs locally. Best performing model locally is "Phi3" using "Ollama".</li><li>Introduce logic to pass LLMs only relevant transaction info, reducing risk of hallucination tremendously.</li><li>Introduce capabilities to store different files correlating to different dates</li><li>Got PR merged for the final state of chatbot which extracts date information from user message, searches KnowledgeBase folder for relevant date, and answers user question related to their transactions.</li>
+| Axesh Patel |<li>Solved all the errors and fine-tuned the Llama.cpp model and successfully pushed the code on GitHub.</li><li>Created Dolfin comprehensive FAQ document containing 100 general questions and answers related to customer assistance for the Dolfin application.</li><li>Integrated the FAQ document as a knowledge base for the chatbot, utilizing a Retrieval-Augmented Generation (RAG) model for accurate responses.</li><li>Implemented a new version of the chatbot using Groq cloud's API to leverage Meta's latest LLAMA3 model.</li><li>Enhanced chatbot capabilities by utilizing the newest version of the LLM, improving performance and user interaction.</li><li>Created a detailed report comparing the LLAMA CPP model and the LLAMA Groq API model.</li><li>Added voice recognition and sentiment analysis features to both Llama.cpp and Groq API versions of chatbots.</li><li>Integrated both chatbot models with the front end, providing flexibility to switch between models by simply commenting/uncommenting code.</li><li>Documented the implementation and integration process for both chatbot models, detailing steps.</li>
+| Deepak Kumar Khatri| <li>Worked on Login Route to change it to Login Using Email Rather Than username</li><li>Updated Login User interface </li><li> Helped Aishwarya with Github commits and Data Quality Scripts </li><li> Helped Sahana Setting up the Code Enviroment, Gave her overview of the Code</li><li>Helped Sahana With Profile Route Updation and helped her to commit the Code on Github </li><li>helped Vishal with his Delete user Account task by providing code guidance</li><li>Helped Liny with setting up the code Enviroment and helping her to understand the Code.</li><li>Set up the New Dolfin on my local system</li><li>Currently Working on Writting Code Setup instruction</li><li>Attended HandOver Document Meeting to understand the process, will start work on it</li> 
+| Vishal Kumar | <li>Implemented registration page functionality, ensuring responsiveness after addressing non-responsiveness issues.</li><li>Worked on the implementation of the "Delete an Account" feature, advancing both front-end and back-end tasks.</li><li>Collaborated with Junkai to enhance understanding of backend systems, databases, and routes for effective execution of the task.</li><li>Successfully completed the frontend and backend task for the "Delete an Account" functionality.</li><li>Encountered a testing issue due to the absence of data in the new database; identified the root cause and discussed it with team members for resolution.</li><li>Completed the data insertion process for the new database, enabling proper testing of the "Delete an Account" functionality.</li><li>Tested and ensured the functionality of the "Delete an Account" feature; committed and merged the code into the development branch after review.</li><li>Discussed and planned the next task with team members: adding an Acknowledgment Section to the About Us page.</li><li>Implemented the Acknowledgment Section in the About Us page, with the code committed and approved after review.</li> |
+| Aishwarya Mahajan | <li> Proposed and established a comprehensive data quality platform by sharing a data quality report.</li><li> Created validation scripts for data dictionary ensuring data integrity and accuracy for customer, account, transaction and loan tables.</li><li> Implemented checks for not-null constraints, unique constraints, range validations, allowed values, and regex pattern matching.</li><li> Introduced a new Data Quality folder in the GitHub repository.</li><li> Formed and led a dedicated Data Quality team focussing the validation of transactional data in database.</li><li> Developed Python scripts for visualizing monthly spending data for users.</li><li> Created detailed bar charts with color gradients to indicate spending intensity. </li> |
+| (Mariska) Heera Mohanadas | <li> Reviewed logging function, created report / review on it.</li> <li> Enhanced logging function, adding log rotation and reduced noise</li> <li> Created internal denial list to reject common/weak strings in potential passwords</li> <li>Conducted risk assessments on two third-party services, GroqCloud API and Pinecone</li> <li>Attended leadership meetings to discuss handover documents, and discuss project future</li> <li> Created script for Dolfin (old) showcase video, recorded my part and then added Junkai's part into it, and then uploaded showcase video to Panopto</li> <li>Reviewed the work of other students (code and documentation) to ensure they satisfied corresponding requirements of their Trello task, primarily cyber security students though</li> <li>Answered student queries</li> <li>Regularly posted updates and notified Dolfin project members on the timelines of the unit</li> <li>Answered student queries, troubleshooting</li> <li>Conducted code reviews on PRs, ensuring they do not adversely affect or compromise the security of the website or its credentials</li> <li>Hosted a meeting to discuss handover documents and delegation with junior leadership students</li>|
+| Denica Hope | <li> Finalised the creation of the data generation python scripts for transaction data, home loan data, credit card data including compiling a reference list of hundred Australian merchant names (real businesses) that I also categorised with our new classfication categories </li> <li> Created a python script to replicate item 3 of the Melbourne Institute-CBA Observed Finance Wellbeing Scale and tested against multiple datasets to validate output was correct </li> <li> Created gauge chart using python to visualise the years remaining on a home loan (displayed loan total years, years passed and years remaining) </li> <li> Created a sankey chart using python to visualise the spread of total spend across the mid level transaction classification heirachy </li> <li> Held weekly meetings for DS/AI stream, created group posts of key dates for end of trimester, created new trello cards for visualisations and financial wellbeing tasks, assisted students with clarifying tasks, providing feedback on submissions </li> 
 </details>

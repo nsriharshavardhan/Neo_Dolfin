@@ -1,0 +1,53 @@
+import React, { useEffect } from 'react';
+import './dash.css'; // Import your CSS file
+
+const Dashboard = ({ username }) => {
+    useEffect(() => {
+        // Include your JavaScript code here
+        const script = document.createElement('script');
+        script.src = '{{url_for('static', filename='js/dash.js')}}';
+        script.async = true;
+        document.body.appendChild(script);
+        return () => {
+            document.body.removeChild(script);
+        };
+    }, []);
+
+    return (
+        <div>
+            <div id="headerSection">
+                <h1 id="headerTitle" style={{ textAlign: 'center', color: '#0077BB' }}>Dashboard</h1>
+            </div>
+            <svg id="rectangleDivider" width="100%" height="12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="100%" height="12" fill="#343A40" />
+            </svg>
+            <div className="container">
+                <div className="row">
+                    <div className="col inline-block">
+                        <h2 id="welcomedash">Welcome back, {username}!</h2>
+                        <svg width="765" height="305" viewBox="0 0 765 305" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            {/* Your SVG content */}
+                        </svg>
+                    </div>
+                    <div className="col inline-block">
+                        <div id="piechart" style={{ marginTop: '60px' }}></div>
+                    </div>
+                </div>
+                <div id="line-chart-container">
+                    <div id="line-chart" style={{ width: '100%', height: '400px' }}></div>
+                </div>
+                <div><p></p></div>
+                <div id="line-chart-container">
+                    <div id="line-chart2" style={{ width: '100%', height: '400px' }}></div>
+                </div>
+                <div>
+                    <p> </p>
+                    <p> </p>
+                </div>
+                {/* Include your chatbot widget component here */}
+            </div>
+        </div>
+    );
+};
+
+export default Dashboard;
